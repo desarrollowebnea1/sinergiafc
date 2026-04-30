@@ -353,18 +353,22 @@
 </section>
 
 <!-- GALERÍA -->
-<section id="galeria">
+<section id="galeria" style="background:var(--bordo-dark);padding:2rem 1.5rem 3rem;">
   <div class="container">
-  
-    <h2 class="section-title">Galería</h2>
+    <h2 class="section-title" style="color:#fff;margin-bottom:1.25rem;">Galería</h2>
     <div class="galeria-grid">
-      <img src="./foto1.jpg" alt="Equipo Sinergia en cancha" class="fade">
-      <img src="./foto2.jpg" alt="Sinergia F5 pies en círculo" class="fade d1">
-      <img src="./foto3.jpg" alt="Copa Sinergia" class="fade d2">
-      <img src="./foto4.jpg.jpeg" alt="Equipo Sinergia con bandera" class="fade d3">
+      <img src="./foto1.jpg" alt="Equipo Sinergia en cancha" class="fade" onclick="abrirFoto(this.src)">
+      <img src="./foto2.jpg" alt="Sinergia F5 pies en círculo" class="fade d1" onclick="abrirFoto(this.src)">
+      <img src="./foto3.jpg" alt="Copa Sinergia" class="fade d2" onclick="abrirFoto(this.src)">
+      <img src="./foto4.jpg.jpeg" alt="Equipo Sinergia con bandera" class="fade d3" onclick="abrirFoto(this.src)">
     </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="cerrarFoto()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <img id="lightbox-img" src="" style="max-width:92vw;max-height:92vh;border-radius:6px;object-fit:contain;">
+</div>
 
 <!-- STAFF -->
 <section id="staff">
@@ -667,6 +671,19 @@ function mostrarAlerta(tipo, msg) {
   el.scrollIntoView({ behavior:'smooth', block:'nearest' });
   setTimeout(() => el.style.display='none', 7000);
 }
+
+function abrirFoto(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = src;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function cerrarFoto() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') cerrarFoto(); });
+  
 </script>
 </body>
 </html>
